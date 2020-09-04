@@ -35,7 +35,6 @@ public class MainController {
 			UserController.user();
 			break;
 		default:
-			
 			break;
 		}	
 	}
