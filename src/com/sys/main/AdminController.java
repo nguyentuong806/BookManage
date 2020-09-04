@@ -27,7 +27,6 @@ public class AdminController {
 				break;
 			default:
 				choice = Constants.LOGOUT;
-				//aaaa
 				break;
 			}
 		} while (choice != Constants.LOGOUT);
