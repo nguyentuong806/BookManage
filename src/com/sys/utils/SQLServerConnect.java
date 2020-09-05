@@ -10,9 +10,9 @@ public class SQLServerConnect {
 	public static Connection getMyConnect() throws SQLException {
 		String hostName = "localhost";
 		String sqlInstanceName = "SQLSERVER";
-		String database = "BookSys";
+		String database = "BookManagement";
 		String userName = "sa";
-		String password = "Password123@jkl#";
+		String password = "phamdat2201";
 		return getMyConnect(hostName, sqlInstanceName, database, userName, password);
 	}
 
