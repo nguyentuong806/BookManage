@@ -10,6 +10,16 @@ import com.sys.models.BookCase;
 import com.sys.utils.SQLServerConnect;
 
 public class BookCaseDao implements Dao<BookCase>{
+	Connection con;
+	Statement statement;
+	public BookCaseDao(){
+		try{
+			con = SQLServerConnect.getMyConnect();
+			statement = con.createStatement();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 	
 
 	@Override
@@ -42,11 +52,33 @@ public class BookCaseDao implements Dao<BookCase>{
 
 	@Override
 	public boolean update(BookCase t) {
+		String id  = Integer.toString(t.getBookCaseId());
+		try{
+			String query = "UPADATE dbo.BookCase "
+							+"SET book_case_id = " +t.getBookCaseName()
+							+"SET user_id = " +t.getUserId()
+							+"WHERE book_case_id = "+id;
+			statement.executeQuery(query);
+			con.close();
+			return true;
+		}catch(SQLException sqlException){
+			sqlException.printStackTrace();
+			System.out.println("Error update!");
+		}
 		return false;
 	}
 
 	@Override
 	public boolean delete(int id) {
+		String query  = "DELETE FROM dbo.BookCase WHERE book_case_id = "+id;
+		try {
+			statement.executeQuery(query);	
+			con.close();			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error delete!");
+		}
 		return false;
 	}
 
