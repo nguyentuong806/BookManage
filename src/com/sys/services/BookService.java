@@ -8,7 +8,6 @@ import com.sys.dao.BookDao;
 import com.sys.models.Book;
 import com.sys.utils.InputData;
 
-
 public class BookService {
 	public void createBook(Scanner sc) {
 		Book book = new Book();
@@ -19,10 +18,14 @@ public class BookService {
 		book.setBrief(InputData.inputString("4. Enter the prief", sc));
 		book.setCategory(InputData.inputString("5. Enter the category", sc));
 		book.setContent(InputData.inputString("6. Enter the content", sc));
-		BookDao bookDao=new  BookDao();
-		bookDao.insert(book);
+		BookDao bookDao = new BookDao();
+		if (bookDao.insert(book)) {
+			System.out.println("Book successfully created!");
+		} else {
+			System.out.println("Book fail created!");
+		}
 	}
-	
+
 	public void viewListBook() {
 
 	}

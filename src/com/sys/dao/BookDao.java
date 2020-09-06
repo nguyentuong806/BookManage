@@ -79,12 +79,12 @@ public class BookDao implements Dao<Book> {
 			ps.setString(5, t.getContent());
 			ps.setString(6, t.getCategory());
 			ps.execute();
-			System.out.println("Book successfully created!");
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Book fail created!");
+			return false;
 		}
-		return false;
+		
 	}
 
 	@Override
