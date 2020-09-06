@@ -27,7 +27,7 @@ public class MainController {
 		String password = InputData.inputString("Password:", sc);
 		userService.checkUserLogin(userName, password);
 		
-		int authoriry = 2;
+		int authoriry = 1;
 		switch (authoriry) {
 		case Constants.ADMIN_AUTHORITY:
 			AdminController.admin();
