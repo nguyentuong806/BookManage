@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.sampled.SourceDataLine;
+
 import com.sys.models.Book;
 import com.sys.utils.SQLServerConnect;
 
@@ -71,11 +73,42 @@ public class BookDao implements Dao<Book> {
 
 	@Override
 	public boolean update(Book t) {
+		Connection conn;
+		int book_id = t.getBookId();
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			Statement statement = conn.createStatement();
+			String query = "UPADATE dbo.Book "
+							+"SET book_title = " +t.getBookTitle()
+							+"SET author = " +t.getAuthor()
+							+"SET brief = " +t.getBrief()
+							+"SET publisher = " +t.getPublisher()
+							+"SET content = " +t.getContent()
+							+"SET category = " +t.getCategory()
+							+"WHERE book_id = "+book_id;
+			statement.executeQuery(query);				
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error update!");
+		}
 		return false;
+
 	}
 
 	@Override
 	public boolean delete(int id) {
+		String query  = "DELETE FROM dbo.Book WHERE book_id = "+id;
+		Connection conn;
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			Statement statement = conn.createStatement();
+			statement.executeQuery(query);				
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error delete!");
+		}
 		return false;
 	}
 }
