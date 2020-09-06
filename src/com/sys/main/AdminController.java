@@ -10,10 +10,9 @@ import com.sys.utils.Constants;
 public class AdminController {
 	public static void admin() {
 		Scanner sc = new Scanner(System.in);
-		BookService bookService= new BookService();
-		Book book = new Book();
+		BookService bookService = new BookService();
 		String choice;
-		
+
 		do {
 			System.out.println("Hello Admin, Please select a function bellow by entering the corresponding number.");
 			System.out.println("1. Create Book");
@@ -24,7 +23,7 @@ public class AdminController {
 			choice = choice.trim();
 			switch (choice) {
 			case Constants.CREATE_BOOK:
-				bookService.createBook(sc);	
+				bookService.createBook(sc);
 				break;
 			case Constants.DELETE_BOOK:
 				break;
