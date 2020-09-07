@@ -8,6 +8,7 @@ import java.util.Scanner;
 import com.sys.dao.BookCaseDao;
 import com.sys.dao.BookDao;
 import com.sys.dao.ContainDao;
+import com.sys.main.MainController;
 import com.sys.models.Book;
 import com.sys.models.BookCase;
 import com.sys.models.Contain;
@@ -16,7 +17,8 @@ import com.sys.utils.InputData;
 import com.sys.utils.Utils;
 
 public class BookCaseService {
-	
+	BookCaseDao bookCaseDao = new BookCaseDao();
+	ContainDao containDao = new ContainDao();
 	/**
 	 * Get book case id user
 	 * @param user
@@ -33,10 +35,10 @@ public class BookCaseService {
 	 * View book case
 	 * @param user_id
 	 */
-	public void viewBookCase(User user) {
+	public void viewBookCase() {
 		List<Contain> contains = new ArrayList<Contain>();
 		ContainDao containDao = new ContainDao();
-		int book_case_id = BookCaseService.getBookCaseId(user);
+		int book_case_id = BookCaseService.getBookCaseId(MainController.user);
 		contains = containDao.getListByBookCaseId(book_case_id);
 		
 		BookDao bookDao = new BookDao();
@@ -53,7 +55,7 @@ public class BookCaseService {
 	 * Add a new book to book case
 	 * @param sc
 	 */
-	public void addNewBook(User user, Scanner sc) {
+	public void addNewBook(Scanner sc) {
 		ContainDao containDao = new ContainDao();
 		BookDao bookDao = new BookDao();
 		List<Book> books = bookDao.getAll();
@@ -79,7 +81,7 @@ public class BookCaseService {
 			}
 		}
 		String createDate = Utils.formatDate(Calendar.getInstance().getTime(), "YYYY-MM-dd");
-		int bookCaseId = BookCaseService.getBookCaseId(user);
+		int bookCaseId = BookCaseService.getBookCaseId(MainController.user);
 		Contain contain = new Contain();
 		contain.setBookCaseId(bookCaseId);
 		contain.setBookId(bookId);
@@ -96,14 +98,19 @@ public class BookCaseService {
 	 * @param sc
 	 */
 	public void removeBook(Scanner sc) {
-		
+		int bookId = Integer.parseInt(InputData.inputString("Enter book id to remove:", sc));
+		if (containDao.delete(bookId)) {
+			System.out.println("Remove is successfully!");
+		}
 	}
 	
 	/**
 	 * Remove all book case
 	 */
 	public void clearBookCase() {
-		
+		if (containDao.deleteAll()) {
+			System.out.println("Clear successfully!\nYour BookCase is empty");
+		}
 	}
 	
 	

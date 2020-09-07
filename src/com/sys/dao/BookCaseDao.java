@@ -28,16 +28,16 @@ public class BookCaseDao implements Dao<BookCase>{
 	}
 
 	@Override
-	public BookCase get(int user_id) {
+	public BookCase get(int userId) {
 		BookCase bookCase = new BookCase();
 		try {
 			Connection conn = SQLServerConnect.getMyConnect();
 			Statement statement = conn.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.BookCase WHERE user_id = 2");
+			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.[BookCase] WHERE UserID = "+ userId);
 			while(rs.next()) {
-				bookCase.setBookCaseId(Integer.parseInt(rs.getString("book_case_id")));
-				bookCase.setBookCaseName(rs.getString("book_case_name"));
-				bookCase.setUserId(Integer.parseInt(rs.getString("user_id")));
+				bookCase.setBookCaseId(Integer.parseInt(rs.getString("BookCaseID")));
+				bookCase.setBookCaseName(rs.getString("BookCaseName"));
+				bookCase.setUserId(Integer.parseInt(rs.getString("UserID")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,25 +52,25 @@ public class BookCaseDao implements Dao<BookCase>{
 
 	@Override
 	public boolean update(BookCase t) {
-		String id  = Integer.toString(t.getBookCaseId());
-		try{
-			String query = "UPADATE dbo.BookCase "
-							+"SET book_case_id = " +t.getBookCaseName()
-							+"SET user_id = " +t.getUserId()
-							+"WHERE book_case_id = "+id;
-			statement.executeQuery(query);
-			con.close();
-			return true;
-		}catch(SQLException sqlException){
-			sqlException.printStackTrace();
-			System.out.println("Error update!");
-		}
+//		String id  = Integer.toString(t.getBookCaseId());
+//		try{
+//			String query = "UPADATE dbo.BookCase "
+//							+"SET BookCaseID = " +id
+//							+"SET user_id = " +t.getUserId()
+//							+"WHERE book_case_id = "+id;
+//			statement.executeQuery(query);
+//			con.close();
+//			return true;
+//		}catch(SQLException sqlException){
+//			sqlException.printStackTrace();
+//			System.out.println("Error update!");
+//		}
 		return false;
 	}
 
 	@Override
 	public boolean delete(int id) {
-		String query  = "DELETE FROM dbo.BookCase WHERE book_case_id = "+id;
+		String query  = "DELETE FROM dbo.[BookCase] WHERE BookCaseID = "+id;
 		try {
 			statement.executeQuery(query);	
 			con.close();			

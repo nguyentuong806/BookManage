@@ -12,7 +12,7 @@ public class SQLServerConnect {
 		String sqlInstanceName = "SQLSERVER";
 		String database = "BookManagement";
 		String userName = "sa";
-		String password = "phamdat2201";
+		String password = "Password123@jkl#";
 		return getMyConnect(hostName, sqlInstanceName, database, userName, password);
 	}
 
@@ -25,7 +25,6 @@ public class SQLServerConnect {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(connectionURL, userName, password);
-//			System.out.println("Connection successfully!");
 		} catch (SQLException e) {
 			System.out.println("Connection faild!");
 			return null;

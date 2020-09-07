@@ -29,8 +29,7 @@ public class UserController {
 			case Constants.READ_BOOK:
 				break;
 			case Constants.VIEW_YOUR_BOOKCASE:
-				User user1 = new User(2, "admin", "1");
-				bookCaseService.viewBookCase(user1);
+				bookCaseService.viewBookCase();
 				break;
 			case Constants.EDIT_YOUR_BOOKCASE:
 				String choiceEditBookCase;
@@ -44,12 +43,13 @@ public class UserController {
 					choiceEditBookCase = choiceEditBookCase.trim();
 					switch (choiceEditBookCase) {
 					case Constants.ADD_NEW_BOOK:
-						User user2 = new User(2, "admin", "1");
-						bookCaseService.addNewBook(user2, sc);
+						bookCaseService.addNewBook(sc);
 						break;
 					case Constants.REMOVE_BOOK:
+						bookCaseService.removeBook(sc);
 						break;
 					case Constants.CLEAR_BOOKCASE:
+						bookCaseService.clearBookCase();
 						break;
 					default:
 						choiceEditBookCase = Constants.LOGOUT;

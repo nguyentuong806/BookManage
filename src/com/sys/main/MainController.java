@@ -14,6 +14,8 @@ import com.sys.utils.InputData;
 import com.sys.utils.SQLServerConnect;
 
 public class MainController {
+	
+	public static User user;
 
 	//thay doi o day
 	public static void main(String[] args) throws SQLException {
@@ -26,7 +28,7 @@ public class MainController {
 		String userName = InputData.inputString("User name:", sc);
 		String password = InputData.inputString("Password:", sc);
 		userService.checkUserLogin(userName, password);
-		
+		user = new User(3, "user", "1234");
 		int authoriry = 2;
 		switch (authoriry) {
 		case Constants.ADMIN_AUTHORITY:
@@ -34,6 +36,9 @@ public class MainController {
 			break;
 		case Constants.USER_AUTHORITY:
 			UserController.user();
+			break;
+		case Constants.ADMIN_USER_AUTHORITY:
+			//account la admin & user
 			break;
 		default:
 			break;

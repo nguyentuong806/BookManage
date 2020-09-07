@@ -13,26 +13,37 @@ import com.sys.models.Book;
 import com.sys.utils.SQLServerConnect;
 
 public class BookDao implements Dao<Book> {
-
+	Connection conn;
+	Statement statement;
+	
+	public BookDao() {
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			statement = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public List<Book> getAll() {
 		List<Book> books = new ArrayList<Book>();
-		Connection conn;
+//		Connection conn;
 		Book book = null;
 		try {
-			conn = SQLServerConnect.getMyConnect();
-			Statement statement = conn.createStatement();
-			String sql = "SELECT * FROM dbo.Book";
+//			conn = SQLServerConnect.getMyConnect();
+//			Statement statement = conn.createStatement();
+			String sql = "SELECT * FROM dbo.[Book]";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()) {
 				book = new Book();
-				book.setBookId(Integer.parseInt(rs.getString("book_id")));
-				book.setBookTitle(rs.getNString("book_title"));
-				book.setAuthor(rs.getString("author"));
-				book.setBrief(rs.getString("brief"));
-				book.setPublisher(rs.getNString("publisher"));
-				book.setContent(rs.getNString("content"));
-				book.setCategory(rs.getNString("category"));
+				book.setBookId(Integer.parseInt(rs.getString("BookID")));
+				book.setBookTitle(rs.getNString("BookTitle"));
+				book.setAuthor(rs.getString("Author"));
+				book.setBrief(rs.getString("Brief"));
+				book.setPublisher(rs.getNString("Publisher"));
+				book.setContent(rs.getNString("Content"));
+				book.setCategory(rs.getNString("Category"));
 				books.add(book);
 			}
 		} catch (SQLException e) {
@@ -43,22 +54,22 @@ public class BookDao implements Dao<Book> {
 
 	@Override
 	public Book get(int id) {
-		Connection conn;
+//		Connection conn;
 		Book book = null;
 		try {
-			conn = SQLServerConnect.getMyConnect();
-			Statement statement = conn.createStatement();
-			String sql = "SELECT * FROM dbo.Book WHERE book_id =" + id;
+//			conn = SQLServerConnect.getMyConnect();
+//			Statement statement = conn.createStatement();
+			String sql = "SELECT * FROM dbo.[Book] WHERE BookID =" + id;
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()) {
 				book = new Book();
-				book.setBookId(Integer.parseInt(rs.getString("book_id")));
-				book.setBookTitle(rs.getNString("book_title"));
-				book.setAuthor(rs.getString("author"));
-				book.setBrief(rs.getString("brief"));
-				book.setPublisher(rs.getNString("publisher"));
-				book.setContent(rs.getNString("content"));
-				book.setCategory(rs.getNString("category"));
+				book.setBookId(Integer.parseInt(rs.getString("BookID")));
+				book.setBookTitle(rs.getNString("BookTitle"));
+				book.setAuthor(rs.getString("Author"));
+				book.setBrief(rs.getString("Brief"));
+				book.setPublisher(rs.getNString("Publisher"));
+				book.setContent(rs.getNString("Content"));
+				book.setCategory(rs.getNString("Category"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,14 +89,14 @@ public class BookDao implements Dao<Book> {
 		try {
 			conn = SQLServerConnect.getMyConnect();
 			Statement statement = conn.createStatement();
-			String query = "UPADATE dbo.Book "
-							+"SET book_title = " +t.getBookTitle()
-							+"SET author = " +t.getAuthor()
-							+"SET brief = " +t.getBrief()
-							+"SET publisher = " +t.getPublisher()
-							+"SET content = " +t.getContent()
-							+"SET category = " +t.getCategory()
-							+"WHERE book_id = "+book_id;
+			String query = "UPADATE dbo.[Book] "
+							+"SET BookTitle = " +t.getBookTitle()
+							+"SET Author = " +t.getAuthor()
+							+"SET Brief = " +t.getBrief()
+							+"SET Publisher = " +t.getPublisher()
+							+"SET Content = " +t.getContent()
+							+"SET Category = " +t.getCategory()
+							+"WHERE BookID = "+book_id;
 			statement.executeQuery(query);				
 			return true;
 		} catch (SQLException e) {
@@ -98,7 +109,7 @@ public class BookDao implements Dao<Book> {
 
 	@Override
 	public boolean delete(int id) {
-		String query  = "DELETE FROM dbo.Book WHERE book_id = "+id;
+		String query  = "DELETE FROM dbo.[Book] WHERE BookID = "+id;
 		Connection conn;
 		try {
 			conn = SQLServerConnect.getMyConnect();
