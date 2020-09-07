@@ -125,5 +125,12 @@ public class BookCaseService {
 					+ book.getPublisher());
 		}
 	}
+	/**
+	 * Update bookcase by id
+	 * @param id
+	 */
+	public static void updateBookCase(int id){
+
+	}
 
 }
