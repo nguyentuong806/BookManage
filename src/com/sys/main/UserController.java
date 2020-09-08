@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 import com.sys.models.User;
 import com.sys.services.BookCaseService;
+import com.sys.services.BookService;
 import com.sys.utils.Constants;
 
 public class UserController {
 	public static void user() {
 		BookCaseService bookCaseService = new BookCaseService();
+		BookService bookService = new BookService();
 		Scanner sc = new Scanner(System.in);
 		String choice;
 		do {
@@ -23,6 +25,7 @@ public class UserController {
 			choice = choice.trim();
 			switch (choice) {
 			case Constants.VIEW_LIST_BOOK:
+				bookService.viewListBook();
 				break;
 			case Constants.SEARCH_BOOK:
 				break;
