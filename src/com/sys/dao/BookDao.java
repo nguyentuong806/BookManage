@@ -79,12 +79,12 @@ public class BookDao implements Dao<Book> {
 			conn = SQLServerConnect.getMyConnect();
 			Statement statement = conn.createStatement();
 			String query = "UPADATE dbo.Book "
-							+"SET book_title = " +t.getBookTitle()
-							+"SET author = " +t.getAuthor()
-							+"SET brief = " +t.getBrief()
-							+"SET publisher = " +t.getPublisher()
-							+"SET content = " +t.getContent()
-							+"SET category = " +t.getCategory()
+							+"SET book_title = "+"\'"+t.getBookTitle()+"\'"
+							+"SET author = " +"\'" +t.getAuthor()+"\'"
+							+"SET brief = " +"\'"+t.getBrief()+"\'"
+							+"SET publisher = "+"\'" +t.getPublisher()+"\'"
+							+"SET content = "+"\'" +t.getContent()+"\'"
+							+"SET category = "+"\'" +t.getCategory()+"\'"
 							+"WHERE book_id = "+book_id;
 			statement.executeQuery(query);				
 			return true;

@@ -38,11 +38,11 @@ public class UserDao implements Dao<User>{
 
 	@Override
 	public boolean update(User t) {
-		String id  = Integer.toString(t.getId());
+		int id  = t.getId();
 		try{
 			String query = "UPADATE dbo.User "
-							+"SET Username = " +t.getUserName()
-							+"SET Password = " +t.getPassword()
+							+"SET Username = "+"\'" +t.getUserName()+"\'"
+							+"SET Password = "+"\'" +t.getPassword()+"\'"
 							+"WHERE UserID = "+id;
 			statement.executeQuery(query);
 			con.close();

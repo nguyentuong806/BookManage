@@ -55,8 +55,8 @@ public class BookCaseDao implements Dao<BookCase>{
 		String id  = Integer.toString(t.getBookCaseId());
 		try{
 			String query = "UPADATE dbo.BookCase "
-							+"SET book_case_id = " +t.getBookCaseName()
-							+"SET user_id = " +t.getUserId()
+							+"SET book_case_id = " + "\'"+t.getBookCaseName()+"\'"
+							+"SET user_id = " +"\'"+t.getUserId()+"\'"
 							+"WHERE book_case_id = "+id;
 			statement.executeQuery(query);
 			con.close();
