@@ -26,9 +26,8 @@ public class MainController {
 		System.out.println("Wellcome to Read Book  Application! Please enter your username and password.");
 		String userName = InputData.inputString("User name:", sc);
 		String password = InputData.inputString("Password:", sc);
-		userService.checkUserLogin(userName, password);
+		int authoriry = Constants.ADMIN_AUTHORITY;
 		user = new User(3, "user", "1234");
-		int authoriry = 2;
 		switch (authoriry) {
 		case Constants.ADMIN_AUTHORITY:
 			AdminController.admin();
@@ -36,12 +35,9 @@ public class MainController {
 		case Constants.USER_AUTHORITY:
 			UserController.user();
 			break;
-		case Constants.ADMIN_USER_AUTHORITY:
-			//account la admin & user
-			break;
 		default:
 			break;
-		}	
+		}
 	}
 
 }

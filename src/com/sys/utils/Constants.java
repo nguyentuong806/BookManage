@@ -15,9 +15,9 @@ public class Constants {
 	public static final String REMOVE_BOOK = "2";
 	public static final String CLEAR_BOOKCASE = "3";
 	
-	public static final String CREATE_BOOK = "1";
-	public static final String UPDATE_CONTENT_BOOK = "2";
-	public static final String DELETE_BOOK = "3";
+	public static final String CREATE_BOOK = "6";
+	public static final String UPDATE_CONTENT_BOOK = "7";
+	public static final String DELETE_BOOK = "8";
 	
 	public static final int ADMIN_AUTHORITY = 1;
 	public static final int USER_AUTHORITY = 2;

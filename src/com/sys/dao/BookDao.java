@@ -108,14 +108,14 @@ public class BookDao implements Dao<Book> {
 			conn = SQLServerConnect.getMyConnect();
 			Statement statement = conn.createStatement();
 			String query = "UPADATE dbo.[Book] "
-							+"SET BookTitle = " +t.getBookTitle()
-							+"SET Author = " +t.getAuthor()
-							+"SET Brief = " +t.getBrief()
-							+"SET Publisher = " +t.getPublisher()
-							+"SET Content = " +t.getContent()
-							+"SET Category = " +t.getCategory()
-							+"WHERE BookID = "+book_id;
-			statement.executeQuery(query);				
+							+"SET BookTitle = \'" +t.getBookTitle() + "\'"
+							+"SET Author = \'" +t.getAuthor()+ "\'"
+							+"SET Brief = \'" +t.getBrief()+ "\'"
+							+"SET Publisher = \'" +t.getPublisher()+ "\'"
+							+"SET Content = \'" +t.getContent()+ "\'"
+							+"SET Category = \'" +t.getCategory()+ "\'"
+							+"WHERE BookID = \'"+book_id;
+			statement.executeUpdate(query);				
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,12 +132,72 @@ public class BookDao implements Dao<Book> {
 		try {
 			conn = SQLServerConnect.getMyConnect();
 			Statement statement = conn.createStatement();
-			statement.executeQuery(query);				
+			statement.executeUpdate(query);				
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Error delete!");
 		}
 		return false;
+	}
+	
+	public List<Book> search(String name) {
+		List<Book> books = new ArrayList<Book>();
+		String sql = "SELECT * FROM dbo.[Book] " + " WHERE BookTitle LIKE '"+ name+"%';";
+		Connection conn;
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(sql);	
+			
+			while (rs.next()) {
+				Book book = new Book();
+				book.setBookId(rs.getInt("BookID"));
+				book.setBookTitle(rs.getString("BookTitle"));
+				book.setAuthor(rs.getString("Author"));
+				book.setBrief(rs.getString("Brief"));
+				book.setPublisher(rs.getString("Publisher"));
+				book.setContent(rs.getString("Content"));
+				book.setCategory(rs.getString("Category"));
+				books.add(book);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error Search!");
+		}
+		return books;
+	}
+	
+	public List<Book> searchByAuthor(String author) {
+		List<Book> books = new ArrayList<Book>();
+		String sql = "SELECT * FROM dbo.[Book] " + " WHERE Author LIKE '" + author + "%';";
+		Connection conn;
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			Statement statement = conn.createStatement();
+			statement.executeQuery(sql);				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error Search!");
+		}
+		return books;
+	}
+	
+	public List<Book> searchByCategory(String category) {
+		List<Book> books = new ArrayList<Book>();
+		String sql = "SELECT * FROM dbo.[Book] " + " WHERE Category LIKE '" + category +"%';";
+		Connection conn;
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			Statement statement = conn.createStatement();
+			statement.executeQuery(sql);				
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error Search!");
+		}
+		return books;
 	}
 }

@@ -28,8 +28,10 @@ public class UserController {
 				bookService.viewListBook();
 				break;
 			case Constants.SEARCH_BOOK:
+				bookService.Search(sc);
 				break;
 			case Constants.READ_BOOK:
+				bookService.readBook(sc);
 				break;
 			case Constants.VIEW_YOUR_BOOKCASE:
 				bookCaseService.viewBookCase();

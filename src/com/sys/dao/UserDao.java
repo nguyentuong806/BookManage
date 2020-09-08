@@ -38,19 +38,19 @@ public class UserDao implements Dao<User>{
 
 	@Override
 	public boolean update(User t) {
-		String id  = Integer.toString(t.getId());
-		try{
-			String query = "UPADATE dbo.User "
-							+"SET Username = " +t.getUserName()
-							+"SET Password = " +t.getPassword()
-							+"WHERE UserID = "+id;
-			statement.executeQuery(query);
-			con.close();
-			return true;
-		}catch(SQLException sqlException){
-			sqlException.printStackTrace();
-			System.out.println("Error update!");
-		}
+//		String id  = Integer.toString(t.getId());
+//		try{
+//			String query = "UPADATE dbo.User "
+//							+"SET Username = " +t.getUserName()
+//							+"SET Password = " +t.getPassword()
+//							+"WHERE UserID = "+id;
+//			statement.executeQuery(query);
+//			con.close();
+//			return true;
+//		}catch(SQLException sqlException){
+//			sqlException.printStackTrace();
+//			System.out.println("Error update!");
+//		}
 		return false;
 	}
 

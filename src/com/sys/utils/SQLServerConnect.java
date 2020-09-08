@@ -7,28 +7,33 @@ import java.sql.Statement;
 
 public class SQLServerConnect {
 	
-	public static Connection getMyConnect() throws SQLException {
-		String hostName = "localhost";
-		String sqlInstanceName = "SQLSERVER";
-		String database = "BookManagement";
-		String userName = "sa";
-		String password = "Password123@jkl#";
-		return getMyConnect(hostName, sqlInstanceName, database, userName, password);
+	private SQLServerConnect() {
+		
 	}
-
-	private static Connection getMyConnect(String hostName, String sqlInstanceName, String database, String userName,
-			String password) {
-
-		String connectionURL = "jdbc:sqlserver://" + hostName + ":1433" + ";instance=" + sqlInstanceName
-				+ ";databaseName=" + database;
-
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(connectionURL, userName, password);
-		} catch (SQLException e) {
-			System.out.println("Connection faild!");
-			return null;
+	 private static Connection con = null; 
+	  
+	    static
+	    { 
+	    	String hostName = "localhost";
+			String sqlInstanceName = "SQLSERVER";
+			String database = "BookManagement";
+			String userName = "sa";
+			String password = "Password123@jkl#";
+			String connectionURL = "jdbc:sqlserver://" + hostName + ":1433" + ";instance=" + sqlInstanceName
+					+ ";databaseName=" + database;
+	        try { 
+	        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	            con = DriverManager.getConnection(connectionURL, userName, password); 
+	        } 
+	        catch (ClassNotFoundException | SQLException e) { 
+	            e.printStackTrace(); 
+	        } 
+	    }
+	
+	public static Connection getMyConnect() throws SQLException {
+		if(con!=null) {
+			return con;
 		}
-		return conn;
+		return null;
 	}
 }
