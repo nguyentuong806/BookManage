@@ -17,13 +17,12 @@ public class MainController {
 	
 	public static User user;
 
-	//thay doi o day
+	
 	public static void main(String[] args) throws SQLException {
 		Connection conn = SQLServerConnect.getMyConnect();
 		if (conn != null) System.out.println("Connection Successfully!");
 		Scanner sc = new Scanner(System.in);
 		UserService userService = new UserService();		
-		System.out.println("hello");
 		System.out.println("Wellcome to Read Book  Application! Please enter your username and password.");
 		String userName = InputData.inputString("User name:", sc);
 		String password = InputData.inputString("Password:", sc);

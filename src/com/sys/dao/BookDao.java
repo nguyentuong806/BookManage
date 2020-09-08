@@ -1,6 +1,7 @@
 package com.sys.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +36,7 @@ public class BookDao implements Dao<Book> {
 //			Statement statement = conn.createStatement();
 			String sql = "SELECT * FROM dbo.[Book]";
 			ResultSet rs = statement.executeQuery(sql);
-			while(rs.next()) {
+			while (rs.next()) {
 				book = new Book();
 				book.setBookId(Integer.parseInt(rs.getString("BookID")));
 				book.setBookTitle(rs.getNString("BookTitle"));
@@ -61,7 +62,7 @@ public class BookDao implements Dao<Book> {
 //			Statement statement = conn.createStatement();
 			String sql = "SELECT * FROM dbo.[Book] WHERE BookID =" + id;
 			ResultSet rs = statement.executeQuery(sql);
-			while(rs.next()) {
+			while (rs.next()) {
 				book = new Book();
 				book.setBookId(Integer.parseInt(rs.getString("BookID")));
 				book.setBookTitle(rs.getNString("BookTitle"));
@@ -79,7 +80,24 @@ public class BookDao implements Dao<Book> {
 
 	@Override
 	public boolean insert(Book t) {
-		return false;
+		Connection conn;
+		try {
+			conn = SQLServerConnect.getMyConnect();
+			String sql = "INSERT INTO Book VALUES(?,?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, t.getBookTitle());
+			ps.setString(2, t.getAuthor());
+			ps.setString(3, t.getBrief());
+			ps.setString(4, t.getPublisher());
+			ps.setString(5, t.getContent());
+			ps.setString(6, t.getCategory());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
+		
 	}
 
 	@Override

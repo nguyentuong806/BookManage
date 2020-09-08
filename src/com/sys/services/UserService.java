@@ -11,8 +11,7 @@ public class UserService {
 	 * @return
 	 */
 	public int checkUserLogin(String userName, String password) {
-		// add method
-		//System.out.println("Username or Password is wrong!\nPleass enter again:");
 		return Constants.USER_AUTHORITY;
+//		return Constants.ADMIN_AUTHORITY;
 	}
 }

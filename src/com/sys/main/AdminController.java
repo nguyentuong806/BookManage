@@ -2,14 +2,17 @@ package com.sys.main;
 
 import java.util.Scanner;
 
+import com.sys.models.Book;
 import com.sys.models.User;
+import com.sys.services.BookService;
 import com.sys.utils.Constants;
 
 public class AdminController {
 	public static void admin() {
 		Scanner sc = new Scanner(System.in);
+		BookService bookService = new BookService();
 		String choice;
-		
+
 		do {
 			System.out.println("Hello Admin, Please select a function bellow by entering the corresponding number.");
 			System.out.println("1. Create Book");
@@ -20,6 +23,7 @@ public class AdminController {
 			choice = choice.trim();
 			switch (choice) {
 			case Constants.CREATE_BOOK:
+				bookService.createBook(sc);
 				break;
 			case Constants.DELETE_BOOK:
 				break;
