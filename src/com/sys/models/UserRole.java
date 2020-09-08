@@ -7,6 +7,16 @@ public class UserRole {
 	
 	public UserRole() {
 	}
+	
+	
+
+	public UserRole(int userId, int roleId) {
+		super();
+		this.userId = userId;
+		this.roleId = roleId;
+	}
+
+
 
 	public int getUserId() {
 		return userId;

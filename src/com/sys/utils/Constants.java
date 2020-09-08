@@ -21,5 +21,4 @@ public class Constants {
 	
 	public static final int ADMIN_AUTHORITY = 1;
 	public static final int USER_AUTHORITY = 2;
-	public static final int ADMIN_USER_AUTHORITY = 3;
 }

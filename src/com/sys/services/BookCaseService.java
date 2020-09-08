@@ -57,19 +57,7 @@ public class BookCaseService {
 	 */
 	public void addNewBook(Scanner sc) {
 		ContainDao containDao = new ContainDao();
-		BookDao bookDao = new BookDao();
-		List<Book> books = bookDao.getAll();
-		System.out.println("Total " + books.size() + " book");
-		System.out.println("Id	Title	Author	Category	Publisher");
-		for (int i = 0; i < books.size(); i++) {
-			Book book = books.get(i);
-			System.out.println(book.getBookId() + "	"
-					+ book.getBookTitle() + "	"
-					+ book.getAuthor() + "	"
-					+ book.getCategory() + "	"
-					+ book.getPublisher());
-		}
-		
+		BookDao bookDao = new BookDao();		
 		int bookId;
 		while (true) {
 			bookId = InputData.inputInt("Please enter the id:", sc);

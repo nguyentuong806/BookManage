@@ -1,14 +1,34 @@
 package com.sys.dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sys.models.UserRole;
+import com.sys.utils.SQLServerConnect;
 
 public class UserRoleDao implements Dao<UserRole>{
 
 	@Override
 	public List<UserRole> getAll() {
-		// TODO Auto-generated method stub
+		List<UserRole> listUserRole = new ArrayList<>();
+		Connection conn;
+		try {
+            String query = "SELECT * FROM dbo.[UserRole]";
+            conn = SQLServerConnect.getMyConnect();
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            
+            while(rs.next()){
+                UserRole userRole = new UserRole(rs.getInt("UserID"), rs.getInt("RoleID"));
+                listUserRole.add(userRole);
+            }
+            return listUserRole;
+        } catch (Exception e) {
+            System.out.println("Faild!");
+        }
 		return null;
 	}
 
