@@ -3,11 +3,14 @@ package com.sys.main;
 import java.util.Scanner;
 
 import com.sys.models.User;
+import com.sys.services.BookService;
 import com.sys.utils.Constants;
+import com.sys.utils.InputData;
 
 public class AdminController {
 	public static void admin() {
 		Scanner sc = new Scanner(System.in);
+		BookService bookService = new BookService(); 
 		String choice;
 		
 		do {
@@ -24,6 +27,7 @@ public class AdminController {
 			case Constants.DELETE_BOOK:
 				break;
 			case Constants.UPDATE_CONTENT_BOOK:
+				bookService.updateBook(InputData.inputInt("Please enter book id:", sc));
 				break;
 			default:
 				choice = Constants.LOGOUT;
