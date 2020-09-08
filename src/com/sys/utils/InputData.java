@@ -32,11 +32,8 @@ public class InputData {
 	}
 
 	public static String inputString(String msg, Scanner sc) {
-		String str;
-		do {
-			System.out.println(msg);
-			str = sc.nextLine();
-		} while (str.length()==0);
+		System.out.println(msg);
+		String str = sc.nextLine();
 		return str;
 	}
 
